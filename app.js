@@ -12,7 +12,7 @@ const inquirer = require('inquirer');
 // })
 
 const promptProject = portfolioData => {
-    if(!portfolioData) {
+    if(!portfolioData.projects) {
         portfolioData.projects = [];
     }
 
@@ -25,12 +25,30 @@ const promptProject = portfolioData => {
         {
           type: 'input',
           name: 'name',
-          message: 'What is the name of your project?'
+          message: 'What is the name of your project?',
+          validate: projName => {
+              if(projName) {
+                  return true;
+              }
+              else{
+                  console.log('Enter a project name!');
+                  return false;
+              }
+          }
         },
         {
           type: 'input',
           name: 'description',
-          message: 'Provide a description of the project (Required)'
+          message: 'Provide a description of the project (Required)',
+          validate: projDesc => {
+              if(projDesc) {
+                  return true;
+              }
+              else{
+                  console.log('Enter a Project Description!');
+                  return false;
+              }
+          }
         },
         {
           type: 'checkbox',
@@ -41,7 +59,16 @@ const promptProject = portfolioData => {
         {
           type: 'input',
           name: 'link',
-          message: 'Enter the GitHub link to your project. (Required)'
+          message: 'Enter the GitHub link to your project. (Required)',
+          validate: link => {
+              if(link) {
+                  return true;
+              }
+              else{
+                  console.log('Enter a link!');
+                  return false;
+              }
+          }
         },
         {
           type: 'confirm',
@@ -74,17 +101,44 @@ const promptUser = () => {
         {
             type: 'input',
             name: 'name',
-            message: 'What is your name?'
+            message: 'What is your name?',
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                }
+                else{
+                    console.log('Please Enter a name!');
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'github',
-            message: 'Enter your GitHub Username'
+            message: 'Enter your GitHub Username',
+            validate: githubInput => {
+                if (githubInput) {
+                    return true;
+                }
+                else{
+                    console.log('Please enter a Username');
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'about',
-            message: 'Provide some information about yourself:'
+            message: 'Provide some information about yourself:',
+            validate: informationProv => {
+                if(informationProv) {
+                    return true;
+                }
+                else{
+                    console.log('Please enter some information!');
+                    return false;
+                }
+            }
         }
     ]);
 }
